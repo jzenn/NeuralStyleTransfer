@@ -1,0 +1,6 @@
+torch
+torchvision
+yaml
+numpy
+pillow
+pytz
