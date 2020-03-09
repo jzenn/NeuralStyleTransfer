@@ -1,0 +1,18 @@
+action: train
+content_image_folder: testset_content
+content_image_path: /home/zenn/StyleTransfer-test-data/testset_content_4
+content_layers:
+- REPLACE/last-style-layer
+content_weight: 1
+image_saving_path: /home/zenn/NeuralStyleTransfer/experiments/
+model_dir: /home/zenn/StyleTransfer-test-data/torchvision_models
+model_url: https://download.pytorch.org/models/vgg19-dcbb9e9d.pth
+steps: 1500000
+style_image_folder: testset_style
+style_image_path: /home/zenn/StyleTransfer-test-data/testset_style
+style_layers:
+- conv_1_1
+- conv_1_2
+- conv_2_1
+- conv_2_2
+style_weight: 100
