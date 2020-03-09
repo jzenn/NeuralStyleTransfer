@@ -1,9 +1,9 @@
 content_image_path:
- - /home/zenn/StyleTransfer-test-data/testset_content_1
- - /home/zenn/StyleTransfer-test-data/testset_content_2
- - /home/zenn/StyleTransfer-test-data/testset_content_3
- - /home/zenn/StyleTransfer-test-data/testset_content_4
- - /home/zenn/StyleTransfer-test-data/testset_content_5
+ - /home/zenn/StyleTransfer_test_data/testset_content_1
+ - /home/zenn/StyleTransfer_test_data/testset_content_2
+ - /home/zenn/StyleTransfer_test_data/testset_content_3
+ - /home/zenn/StyleTransfer_test_data/testset_content_4
+ - /home/zenn/StyleTransfer_test_data/testset_content_5
 style_weight:
  - 100
  - 1000
