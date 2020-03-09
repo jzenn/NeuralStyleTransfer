@@ -43,8 +43,8 @@ def get_style_loss_module(i):
         return StyleLossGramMatrix
     # MMD loss does not produce the expected results
     # (within two corresponding feature maps and not between all feature maps, entry-wise)
-    elif i == 2:
-        return StyleLossMMD
+    # elif i == 2:
+    #    return StyleLossMMD
     elif i == 2:
         return StyleLossMean
     elif i == 3:

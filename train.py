@@ -1,3 +1,5 @@
+import os
+import sys
 import torch
 
 from net import get_vgg_model
@@ -11,6 +13,12 @@ from data_loader import load_image
 
 from utils import save_image
 from utils import save_single_image
+
+# path to python_utils
+sys.path.insert(0, '../utils')
+sys.path.insert(0, '/home/zenn')
+
+from python_utils.LossWriter import LossWriter
 
 # the device being on
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -48,6 +56,9 @@ def train(configuration):
     style_weight = configuration['style_weight']
     print('content weight: {}, style weight: {}'.format(content_weight, style_weight))
 
+    loss_writer = LossWriter(os.path.join(configuration['folder_structure'].get_parent_folder(), './loss/loss'))
+    loss_writer.write_header(columns=['iteration', 'style_loss', 'content_loss', 'loss'])
+
     for i in range(number_style_images):
         print('style image {}'.format(i))
         for j in range(number_content_images):
@@ -77,7 +88,7 @@ def train(configuration):
                     style_weight *= 100
 
                 img = train_neural_style_transfer(model, style_losses, content_losses,
-                                                  image_noise, steps, style_weight, content_weight).squeeze(0).cpu()
+                                                  image_noise, steps, style_weight, content_weight, loss_writer).squeeze(0).cpu()
 
                 images += [img.clone()]
 
@@ -113,6 +124,9 @@ def train_mmd(configuration):
     print('got {} content images'.format(number_content_images))
     print('using the content images from path: {}'.format(content_image_path))
 
+    loss_writer = LossWriter(os.path.join(configuration['folder_structure'].get_parent_folder(), './loss/loss'))
+    loss_writer.write_header(columns=['iteration', 'style_loss', 'content_loss', 'loss'])
+
     print(style_image_file_paths)
     print(content_image_file_paths)
 
@@ -147,14 +161,15 @@ def train_mmd(configuration):
             print('content weight: {}, style weight: {}'.format(content_weight, style_weight))
 
             img = train_neural_style_transfer(model, style_losses, content_losses,
-                                              image_noise, steps, style_weight, content_weight).squeeze(0).cpu()
+                                              image_noise, steps, style_weight, content_weight, loss_writer).squeeze(0).cpu()
 
             save_image(configuration, img, j, i)
 
             print('got transfer image')
 
 
-def train_neural_style_transfer(model, style_losses, content_losses, image_noise, steps, style_weight, content_weight):
+def train_neural_style_transfer(model, style_losses, content_losses, image_noise, steps, style_weight, content_weight,
+                                loss_writer):
     """
     the actual training of the model
     :param model: the pre-trained VGG-19 model
@@ -164,6 +179,7 @@ def train_neural_style_transfer(model, style_losses, content_losses, image_noise
     :param steps: the number of steps to train
     :param style_weight: the weighting factor for the style loss term
     :param content_weight: the weighting factor for the content loss term
+    :param loss_writer: loss writer that writes the loss to csv
     :return: the stylized image
     """
     optimizer = get_input_optimizer(image_noise)
@@ -191,7 +207,10 @@ def train_neural_style_transfer(model, style_losses, content_losses, image_noise
             for cl in content_losses:
                 content_score += content_loss_factor * cl.loss
 
-            loss = style_weight * style_score + content_weight * content_score
+            content_loss = content_weight * content_score
+            style_loss = style_weight * style_score
+
+            loss = style_loss + content_loss
 
             loss.to(device)
             loss.backward(retain_graph=True)
@@ -206,9 +225,11 @@ def train_neural_style_transfer(model, style_losses, content_losses, image_noise
 
             run[0] += 1
 
-            return loss
+            return style_loss.item(), content_loss.item(), loss.item()
 
-        _ = optimizer.step(closure)
+        style_loss, content_loss, loss = optimizer.step(closure)
+
+        loss_writer.write_row([run[0], style_loss, content_loss, loss])
 
     # transform image to [0, 1]
     image_noise.data.clamp_(0, 1)
