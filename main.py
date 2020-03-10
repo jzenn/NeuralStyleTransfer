@@ -32,10 +32,13 @@ pprint.pprint(configuration, indent=4)
 configuration['folder_structure'] = FolderStructure(name='nst', working_directory='./experiments')
 configuration['folder_structure'].create_structure(['images', 'loss'])
 
-configuration['image_saving_path'] = os.path.join(configuration['folder_structure'].get_parent_folder(), '/images')
+configuration['image_saving_path'] = os.path.join(configuration['folder_structure'].get_parent_folder(), './images')
 configuration['unique_name'] = UniqueName(name='nst_image', configuration=configuration).get_unique_identifier()
 
 configuration['content_layers'] = [configuration['style_layers'][-1]]
+
+print('the edited configuration used is:')
+pprint.pprint(configuration, indent=4)
 
 
 
