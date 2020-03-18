@@ -56,8 +56,8 @@ def train(configuration):
     style_weight = configuration['style_weight']
     print('content weight: {}, style weight: {}'.format(content_weight, style_weight))
 
-    loss_writer = LossWriter(os.path.join(configuration['folder_structure'].get_parent_folder(), './loss/loss'))
-    loss_writer.write_header(columns=['iteration', 'style_loss', 'content_loss', 'loss'])
+    lr = configuration['lr']
+    print('using a learning rate of {}'.format(lr))
 
     for i in range(number_style_images):
         print('style image {}'.format(i))
@@ -74,6 +74,11 @@ def train(configuration):
 
             for k in range(1, 6):
                 print('training transfer image with loss {}'.format(k))
+
+                loss_writer = LossWriter(
+                    os.path.join(configuration['folder_structure'].get_parent_folder(), './loss/loss'))
+                loss_writer.write_header(columns=['iteration', f'style_loss_{k}', f'content_loss_{k}', f'loss_{k}'])
+
                 torch.manual_seed(1)
                 image_noise = torch.randn(style_image.data.size()).to(device)
                 model, style_losses, content_losses = get_full_style_model(configuration,
@@ -87,7 +92,7 @@ def train(configuration):
                 if k == 1:
                     style_weight *= 100
 
-                img = train_neural_style_transfer(model, style_losses, content_losses,
+                img = train_neural_style_transfer(model, lr, style_losses, content_losses,
                                                   image_noise, steps, style_weight, content_weight, loss_writer).squeeze(0).cpu()
 
                 images += [img.clone()]
@@ -160,7 +165,10 @@ def train_mmd(configuration):
             style_weight = configuration['style_weight']
             print('content weight: {}, style weight: {}'.format(content_weight, style_weight))
 
-            img = train_neural_style_transfer(model, style_losses, content_losses,
+            lr = configuration['lr']
+            print('learning rate: {}'.format(lr))
+
+            img = train_neural_style_transfer(model, lr, style_losses, content_losses,
                                               image_noise, steps, style_weight, content_weight, loss_writer).squeeze(0).cpu()
 
             save_image(configuration, img, j, i)
@@ -168,11 +176,12 @@ def train_mmd(configuration):
             print('got transfer image')
 
 
-def train_neural_style_transfer(model, style_losses, content_losses, image_noise, steps, style_weight, content_weight,
+def train_neural_style_transfer(model, lr, style_losses, content_losses, image_noise, steps, style_weight, content_weight,
                                 loss_writer):
     """
     the actual training of the model
     :param model: the pre-trained VGG-19 model
+    :param lr: the learning rate used
     :param style_losses: a list of style losses to be inserted to the model
     :param content_losses: a list of content losses to be inserted to the model
     :param image_noise: the noise image
@@ -182,7 +191,7 @@ def train_neural_style_transfer(model, style_losses, content_losses, image_noise
     :param loss_writer: loss writer that writes the loss to csv
     :return: the stylized image
     """
-    optimizer = get_input_optimizer(image_noise)
+    optimizer = get_input_optimizer(image_noise, lr)
     model.to(device)
 
     print('style weight: {}, content weight: {}'.format(style_weight, content_weight))
@@ -229,7 +238,8 @@ def train_neural_style_transfer(model, style_losses, content_losses, image_noise
 
         style_loss, content_loss, loss = optimizer.step(closure)
 
-        loss_writer.write_row([run[0], style_loss, content_loss, loss])
+        if run[0] % 10000 == 0:
+            loss_writer.write_row([run[0], style_loss, content_loss, loss])
 
     # transform image to [0, 1]
     image_noise.data.clamp_(0, 1)

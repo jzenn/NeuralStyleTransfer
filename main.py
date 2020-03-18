@@ -37,6 +37,9 @@ configuration['unique_name'] = UniqueName(name='nst_image', configuration=config
 
 configuration['content_layers'] = [configuration['style_layers'][-1]]
 
+with open(os.path.join(configuration['folder_structure'].get_parent_folder(), f'configuration.yaml'), 'w') as f:
+    yaml.dump(configuration, f, default_flow_style=False)
+
 print('the edited configuration used is:')
 pprint.pprint(configuration, indent=4)
 

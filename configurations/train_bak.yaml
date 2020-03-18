@@ -1,4 +1,5 @@
 action:                           train                                                   # the action that is performed
+lr:                               0.1                                                     # the learning rate that is used for image optimization
 style_image_path:                 ./../data/testset_style                                 # path to the style images
 content_image_path:               ./../data/testset_content                               # path to the content images
 style_image_folder:               testset_style                                           # *name* of the style images

@@ -140,8 +140,8 @@ def get_full_style_model(configuration, vgg_model, style_image, content_image, s
     return model, style_losses, content_losses
 
 
-def get_input_optimizer(input_img):
-    optimizer = optim.Adam([input_img.requires_grad_()])
+def get_input_optimizer(input_img, lr):
+    optimizer = optim.Adam([input_img.requires_grad_()], lr=lr)
     return optimizer
 
 

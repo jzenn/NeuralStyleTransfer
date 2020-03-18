@@ -1,10 +1,11 @@
 action:                           train                                                   # the action that is performed
-style_image_path:                 ./../StyleTransfer-test-data/testset_style              # path to the style images
-content_image_path:               ./../StyleTransfer-test-data/testset_content            # path to the content images
+lr:                               0.1                                                     # the learning rate that is used for image optimization
+style_image_path:                 ./../StyleTransfer_test_data/testset_style              # path to the style images
+content_image_path:               ./../StyleTransfer_test_data/testset_content            # path to the content images
 style_image_folder:               testset_style                                           # *name* of the style images
 content_image_folder:             testset_content                                         # *name* of the content images
 image_saving_path:                ./data/result_transfer_images                           # the saving path of the images
-model_dir:                        ./../StyleTransfer-test-data/torchvision_models         # the path to the VGG-19 network
+model_dir:                        ./../StyleTransfer_test_data/torchvision_models         # the path to the VGG-19 network
 model_url:                        https://download.pytorch.org/models/vgg19-dcbb9e9d.pth  # the url to the network (if there is no at model_dir)
 style_layers:                     [ 'conv_1_1', 'conv_2_1', 'conv_3_1', 'conv_4_1' ]      # layers on which style loss is accumulated
 content_layers:                   [ 'conv_4_1' ]                                          # layers on which content loss is accumulated
