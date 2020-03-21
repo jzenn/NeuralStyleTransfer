@@ -7,4 +7,4 @@ model_url:                        https://download.pytorch.org/models/vgg19-dcbb
 image_saving_path:                /home/zenn/NeuralStyleTransfer/experiments/
 content_weight:                   1
 content_layers:                   [ 'REPLACE/last-style-layer' ]
-steps:                            2000000
+steps:                            3000000
