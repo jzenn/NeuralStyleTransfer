@@ -5,7 +5,7 @@
 #SBATCH --partition=week
 #SBATCH --mem-per-cpu=16G
 #SBATCH --gres=gpu:1
-#SBATCH --time=48:00:00
+#SBATCH --time=96:00:00
 #SBATCH --output=jobs/job.%J.out
 #SBATCH --error=jobs/job.%J.err
 #SBATCH --mail-type=ALL
