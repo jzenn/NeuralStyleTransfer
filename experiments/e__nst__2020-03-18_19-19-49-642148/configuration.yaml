@@ -1,0 +1,37 @@
+action: train
+content_image_folder: testset_content
+content_image_path: /home/zenn/StyleTransfer_test_data/testset_content_2
+content_layers:
+- conv_2_2
+content_weight: 1
+folder_structure: !!python/object:python_utils.FolderStructure.FolderStructure
+  name: !!python/object:python_utils.UniqueName.UniqueName
+    configuration: {}
+    ending: ''
+    name: e__nst
+    timestamp: 2020-03-18_19-19-49-642148
+  prefix: e
+  working_directory: /mnt/beegfs/home/zenn/NeuralStyleTransfer/experiments/e__nst__2020-03-18_19-19-49-642148
+image_saving_path: /mnt/beegfs/home/zenn/NeuralStyleTransfer/experiments/e__nst__2020-03-18_19-19-49-642148/./images
+lr: 0.05
+model_dir: /home/zenn/StyleTransfer_test_data/torchvision_models
+model_url: https://download.pytorch.org/models/vgg19-dcbb9e9d.pth
+name: "content_image_path: /home/zenn/StyleTransfer_test_data/testset_content_2\t\
+  \ lr: 0.05\t style_image_path: /home/zenn/StyleTransfer_test_data/testset_style_4\t\
+  \ style_layers: ['conv_1_1', 'conv_1_2', 'conv_2_1', 'conv_2_2']\t style_weight:\
+  \ 1000\t"
+steps: 2000000
+style_image_folder: testset_style
+style_image_path: /home/zenn/StyleTransfer_test_data/testset_style
+style_layers:
+- conv_1_1
+- conv_1_2
+- conv_2_1
+- conv_2_2
+style_weight: 1000
+unique_name: "nst_image__action-train__content_image_folder-testset_content__content_image_path-/home/zenn/StyleTransfer_test_data/testset_content_2__content_layers-['REPLACE/last-style-layer']__content_weight-1__folder_structure-<python_utils.FolderStructure.FolderStructure\
+  \ object at 0x7fb55e9f3128>__image_saving_path-/mnt/beegfs/home/zenn/NeuralStyleTransfer/experiments/e__nst__2020-03-18_19-19-49-642148/./images__lr-0.05__model_dir-/home/zenn/StyleTransfer_test_data/torchvision_models__model_url-https://download.pytorch.org/models/vgg19-dcbb9e9d.pth__name-content_image_path:\
+  \ /home/zenn/StyleTransfer_test_data/testset_content_2\t lr: 0.05\t style_image_path:\
+  \ /home/zenn/StyleTransfer_test_data/testset_style_4\t style_layers: ['conv_1_1',\
+  \ 'conv_1_2', 'conv_2_1', 'conv_2_2']\t style_weight: 1000\t__steps-2000000__style_image_folder-testset_style__style_image_path-/home/zenn/StyleTransfer_test_data/testset_style__style_layers-['conv_1_1',\
+  \ 'conv_1_2', 'conv_2_1', 'conv_2_2']__style_weight-1000__2020-03-18_19-19-49-646353"
