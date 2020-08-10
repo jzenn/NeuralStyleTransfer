@@ -1,7 +1,7 @@
 # Neural Transfer
 
 This project implements the neural transfer algorithm proposed by Gatys
-et al. in **(cite Gatys et al.)**. Gradient descent is performed on a noise image to
+et al. in [1]. Gradient descent is performed on a noise image to
 match the features of a content image and a style image produced by an encoder network. 
 
 - The project is written in Python ```3.7``` and uses PyTorch ```1.1``` 
@@ -50,4 +50,8 @@ neural trainsfer network makes up one chapter of the final thesis. A slightly mo
 version of the chapter can be found in this repository as a pdf-file. Also, the chapter 
 introduces all related formulas to this work. 
 
-The final thesis can be found **(link here)** in a corrected and modified version. 
+The final thesis can be found [here](https://) in a corrected and modified version.
+
+### References
+
+[1] L. Gatys, A. Ecker, and M. Bethge. Texture synthesis using convolutional neural networks. In Conference on Neural Information Processing Systems (NIPS), 2015. 
