@@ -7,6 +7,7 @@
 data/
 *.csv
 experiments
+grid_search
 
 # notebooks
 .ipynb*
