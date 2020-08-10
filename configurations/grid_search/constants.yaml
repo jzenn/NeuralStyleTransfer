@@ -1,6 +1,6 @@
 action:                           train
 style_image_path:                 /home/zenn/StyleTransfer_test_data/testset_style
-style_image_folder:               testset_style
+#style_image_folder:               testset_style
 content_image_folder:             testset_content
 model_dir:                        /home/zenn/StyleTransfer_test_data/torchvision_models
 model_url:                        https://download.pytorch.org/models/vgg19-dcbb9e9d.pth

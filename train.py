@@ -15,10 +15,10 @@ from utils import save_image
 from utils import save_single_image
 
 # path to python_utils
-sys.path.insert(0, '../utils')
-sys.path.insert(0, '/home/zenn')
+sys.path.insert(0, '../utils/ml_utils_pkg')
+sys.path.insert(0, '/home/zenn/python_utils')
 
-from python_utils.LossWriter import LossWriter
+from ml_utils.writer import LossWriter
 
 # the device being on
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')

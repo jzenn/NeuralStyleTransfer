@@ -9,7 +9,7 @@ content_image_path:
 # - /home/zenn/StyleTransfer_test_data/testset_content_4
 # - /home/zenn/StyleTransfer_test_data/testset_content_5
 style_image_path:
- - /home/zenn/StyleTransfer_test_data/testset_style_1
+# - /home/zenn/StyleTransfer_test_data/testset_style_1
 # - /home/zenn/StyleTransfer_test_data/testset_style_2
  - /home/zenn/StyleTransfer_test_data/testset_style_3
 # - /home/zenn/StyleTransfer_test_data/testset_style_4

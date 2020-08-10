@@ -6,6 +6,7 @@
 # data
 data/
 *.csv
+experiments
 
 # notebooks
 .ipynb*
