@@ -41,7 +41,7 @@ configuration that is used e.g. ```python main.py './configurations/train.yaml'`
 - ``train.yaml`` produces transfer images from content and style pairs.
 
 - ```train_mmd.yaml``` produces transfer images from content and style pairs. The MMD 
-is utilized as loss function. Please also see **(cite Schölkopf et al.)**.
+is utilized as loss function. Please also see [2].
 
 ### Additional Information
 
@@ -54,4 +54,6 @@ The final thesis can be found [here](https://jzenn.github.io/projects/bsc-thesis
 
 ### References
 
-[1] L. Gatys, A. Ecker, and M. Bethge. Texture synthesis using convolutional neural networks. In Conference on Neural Information Processing Systems (NIPS), 2015. 
+[1] L. Gatys, A. Ecker, and M. Bethge. Texture synthesis using convolutional neural networks. In Conference on Neural Information Processing Systems (NIPS), 2015.
+
+[2] A. Gretton, K. Borgwardt, M. Rasch, B. Schölkopf, and A. Smola. A kernel two-sample test. J. Mach. Learn. Res., 2012. 
